@@ -14,3 +14,6 @@ requires-python = ">=3.7"
 dependencies = [
     "requests > 2.26.0"
 ]
+
+[project.scripts]
+youbike = "youbike:main"
