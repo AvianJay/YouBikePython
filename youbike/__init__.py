@@ -21,3 +21,6 @@ def searchstation(name, data=getdata()):
         elif name in station["address_tw"]:
             results.append(station)
     return results
+
+def main(argv):
+    print(argv)
