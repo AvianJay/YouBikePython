@@ -1,5 +1,7 @@
+import sys
 import json
 import requests
+import argparse
 
 def getdata():
     headers = {
@@ -11,7 +13,9 @@ def getdata():
     response = requests.get('https://apis.youbike.com.tw/json/station-yb2.json', headers=headers)
     return response.json()
 
-def searchstation(name, data=getdata()):
+def searchstation(name, data=None):
+    if not data:
+        data = getdata()
     results = []
     for station in data:
         if name in station["name_tw"]:
@@ -22,5 +26,5 @@ def searchstation(name, data=getdata()):
             results.append(station)
     return results
 
-def main(argv):
+def main(argv=sys.argv):
     print(argv)
