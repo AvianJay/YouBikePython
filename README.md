@@ -1,7 +1,7 @@
 # YouBikePython
 YouBike API for python
 # 安裝
-我不知道這可不可以用
+從PyPI安裝：
 ```shell
 pip install YouBikePython
 ```
