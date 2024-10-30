@@ -1,3 +1,5 @@
+# My code is shit.
+# Main file of YouBikePython.
 import sys
 import requests
 import argparse
