@@ -9,3 +9,5 @@ pip install YouBikePython
 ```shell
 pip install git+https://github.com/AvianJay/YouBikePython
 ```
+# 使用
+使用 `youbike -h` 來取得幫助。
