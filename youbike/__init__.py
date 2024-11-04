@@ -41,9 +41,11 @@ def searchstation(name, data=None):
 def formatdata(stations):
     result = "ID  名稱  總共車位  可停車位  YB2.0  YB2.0E\n"
     for station in stations:
+        # I don't know why their api available is parked
+        available = station['parking_spaces'] - station['available_spaces']
         result += (
             f"{station['station_no']}  {station['name_tw']}  "
-            f"{station['parking_spaces']}  {station['available_spaces']}  "
+            f"{station['parking_spaces']}  {available}  "
             f"{station['available_spaces_detail']['yb2']}  "
             f"{station['available_spaces_detail']['eyb']}\n"
         )
