@@ -25,7 +25,7 @@ def getallstations(gz=True):
 
 
 def getstationbyid(id, gz=True):
-    stations = getdata(gz=gz)
+    stations = getallstations(gz=gz)
     for station in stations:
         if id == station["station_no"]:
             return station
@@ -34,7 +34,7 @@ def getstationbyid(id, gz=True):
 
 def getstationbyname(name, data=None):
     if not data:
-        data = getdata()
+        data = getallstations()
     results = []
     for station in data:
         if name in station["name_tw"]:
