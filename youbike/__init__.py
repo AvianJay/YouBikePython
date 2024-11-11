@@ -5,7 +5,7 @@ import requests
 import argparse
 
 
-def getdata(gz=True):
+def getallstations(gz=True):
     if gz:
         headers = {
             'User-Agent': 'Dart/3.3 (dart:io)',
@@ -24,7 +24,15 @@ def getdata(gz=True):
     return response.json()
 
 
-def searchstation(name, data=None):
+def getstationbyid(id, gz=True):
+    stations = getdata(gz=gz)
+    for station in stations:
+        if id == station["station_no"]:
+            return station
+    return None
+
+
+def getstationbyname(name, data=None):
     if not data:
         data = getdata()
     results = []
@@ -63,7 +71,7 @@ def main():
     if args.cmd == "showall":
         print(formatdata(getdata()))
     elif args.cmd == "search":
-        print(formatdata(searchstation(args.name)))
+        print(formatdata(getstationbyname(args.name)))
     else:
         print("使用", sys.argv[0], "-h 來取得指令用法。")
         sys.exit(1)
