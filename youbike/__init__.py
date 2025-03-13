@@ -96,7 +96,7 @@ def main():
     args = parser.parse_args()
 
     if args.cmd == "showall":
-        print(formatdata(getdata()))
+        print(formatdata(getallstations()))
     elif args.cmd == "search":
         print(formatdata(getstationbyname(args.name)))
     elif args.cmd == "location":
