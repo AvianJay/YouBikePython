@@ -90,8 +90,8 @@ def main():
     parser_search = subparsers.add_parser("search", help="搜尋站點")
     parser_search.add_argument("name", help="關鍵字", type=str)
     parser_location = subparsers.add_parser("location", help="利用座標取得站點")
-    parser_location.add_argument("lat", help="經度", type=float)
-    parser_location.add_argument("lon", help="緯度", type=float)
+    parser_location.add_argument("lat", help="緯度", type=float)
+    parser_location.add_argument("lon", help="經度", type=float)
     parser_location.add_argument("distance", help="距離(公尺)", type=float)
     args = parser.parse_args()
 
