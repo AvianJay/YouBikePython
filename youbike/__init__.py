@@ -62,14 +62,24 @@ def getstationbyname(name, data=None):
     return results
 
 
-def getstationbylocation(lat, lon, distance, data=None):
+def getstationbylocation(lat, lon, distance=0, data=None):
+    # if distance is 0, get nearest station
     if not data:
         data = getallstations()
-    results = []
+    results = [] if distance >= 0 else {}
     for station in data:
         td = measure(lat, lon, float(station["lat"]), float(station["lng"]))
-        if td <= distance:
-            results.append(station)
+        if distance >= 0:
+            if td <= distance:
+                station["distance"] = td
+                results.append(station)
+        else:
+            if station == {}:
+                station["distance"] = td
+                results = station
+            elif td <= station["distance"]:
+                station["distance"] = td
+                results = station
     return results
 
 
