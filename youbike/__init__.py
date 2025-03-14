@@ -43,7 +43,7 @@ def getallstations(gz=True):
 def getstationbyid(id, gz=True):
     stations = getallstations(gz=gz)
     for station in stations:
-        if id == station["station_no"]:
+        if str(id) == station["station_no"]:
             return station
     return None
 
