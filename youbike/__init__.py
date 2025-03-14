@@ -68,21 +68,21 @@ def getstationbylocation(lat, lon, distance=0, data=None):
         raise Exception("Distance cannot < 0")
     if not data:
         data = getallstations()
-    results = [] if distance > 0 else {}
+    result = [] if distance > 0 else {}
     for station in data:
         td = measure(lat, lon, float(station["lat"]), float(station["lng"]))
         if distance > 0:
             if td <= distance:
                 station["distance"] = td
-                results.append(station)
+                result.append(station)
         else:
-            if station == {}:
+            if result == {}:
                 station["distance"] = td
-                results = station
-            elif td <= station["distance"]:
+                result = station
+            elif td <= result["distance"]:
                 station["distance"] = td
-                results = station
-    return results
+                result = station
+    return result
 
 
 def formatdata(stations):
