@@ -142,8 +142,10 @@ class BikeStation:
         self.address_tw = station_data.get('address_tw')
         self.area_code = station_data.get('area_code')
         self.available_spaces = station_data.get('available_spaces')
-        self.available_spaces_detail = station_data.get('available_spaces_detail')
-        self.available_spaces_level = station_data.get('available_spaces_level')
+        self.available_spaces_detail = \
+            station_data.get('available_spaces_detail')
+        self.available_spaces_level = \
+            station_data.get('available_spaces_level')
         self.country_code = station_data.get('country_code')
         self.district_cn = station_data.get('district_cn')
         self.district_en = station_data.get('district_en')
@@ -161,7 +163,11 @@ class BikeStation:
         self.status = station_data.get('status')
         self.time = station_data.get('time')
         self.type = station_data.get('type')
-        self.updated_at = datetime.strptime(station_data.get('updated_at'), '%Y-%m-%d %H:%M:%S') if station_data.get('updated_at') else None
+        self.updated_at = \
+            datetime.strptime(
+                station_data.get('updated_at'),
+                '%Y-%m-%d %H:%M:%S'
+            ) if station_data.get('updated_at') else None
 
     def __repr__(self):
         return f"<BikeStation {self.name_en} ({self.station_no})>",
