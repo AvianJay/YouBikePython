@@ -21,7 +21,7 @@ def measure(lat1, lon1, lat2, lon2):
     return d * 1000  # meters
 
 
-def getallstations(gz=True):
+def getallstations(parkinginfo=True, gz=True):
     if gz:
         headers = {
             'User-Agent': 'Dart/3.3 (dart:io)',
@@ -33,17 +33,25 @@ def getallstations(gz=True):
             'User-Agent': 'Dart/3.3 (dart:io)',
         }
 
+    if parkinginfo:
+        apiurl = 'https://apis.youbike.com.tw/json/station-yb2.json'
+    else:
+        apiurl = 'https://apis.youbike.com.tw/json/station-min-yb2.json'
+
     response = requests.get(
-        'https://apis.youbike.com.tw/json/station-yb2.json',
+        apiurl,
         headers=headers
     )
     return response.json()
 
 
-def getstationbyid(id, gz=True):
+def getstationbyid(id, area_info=False, gz=True):
     stations = getallstations(gz=gz)
     for station in stations:
         if str(id) == station["station_no"]:
+            if area_info:
+                area = getareabyid(station["area_code"], gz=gz)
+                station["area_info"] = area
             return station
     return None
 
@@ -83,6 +91,33 @@ def getstationbylocation(lat, lon, distance=0, data=None):
                 station["distance"] = td
                 result = station
     return result
+
+
+def getallareas(gz=True):
+    if gz:
+        headers = {
+            'User-Agent': 'Dart/3.3 (dart:io)',
+            'Accept-Encoding': 'gzip',
+            'content-encoding': 'gzip',
+        }
+    else:
+        headers = {
+            'User-Agent': 'Dart/3.3 (dart:io)',
+        }
+
+    response = requests.get(
+        'https://apis.youbike.com.tw/json/area-all.json',
+        headers=headers
+    )
+    return response.json()
+
+
+def getareabyid(id: str, gz: bool = True):
+    areas = getallareas(gz=gz)
+    for area in areas:
+        if str(id) == area["area_code"]:
+            return area
+    return None
 
 
 def formatdata(stations):
