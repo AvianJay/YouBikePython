@@ -125,7 +125,7 @@ def formatdata(stations):
     result = "ID  名稱  總共車位  可停車位  YB2.0  YB2.0E\n"
     for station in stations:
         # I don't know why their api available is parked
-        available = station['parking_spaces'] - station['available_spaces']
+        available = station['empty_spaces']
         result += (
             f"{station['station_no']}  {station['name_tw']}  "
             f"{station['parking_spaces']}  {available}  "
