@@ -5,6 +5,7 @@ import math
 import requests
 import argparse
 from datetime import datetime
+from datetime import timezone, timedelta
 
 
 # thanks stackoverflow
@@ -167,7 +168,8 @@ class BikeStation:
             datetime.strptime(
                 station_data.get('updated_at'),
                 '%Y-%m-%d %H:%M:%S'
-            ) if station_data.get('updated_at') else None
+            ).replace(tzinfo=timezone(timedelta(hours=8))) \
+            if station_data.get('updated_at') else None
 
     def __repr__(self):
         return f"<BikeStation {self.name_en} ({self.station_no})>",
