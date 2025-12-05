@@ -1,11 +1,15 @@
 # My code is shit.
 # Main file of YouBikePython.
+import os
 import sys
 import math
 import requests
 import argparse
 from datetime import datetime
 from datetime import timezone, timedelta
+
+
+API_BASE = os.getenv("YOBIKE_API_URL", "https://apis.youbike.com.tw/")
 
 
 # thanks stackoverflow
@@ -36,9 +40,9 @@ def getallstations(parkinginfo=True, gz=True):
         }
 
     if parkinginfo:
-        apiurl = 'https://apis.youbike.com.tw/json/station-yb2.json'
+        apiurl = f'{API_BASE}json/station-yb2.json'
     else:
-        apiurl = 'https://apis.youbike.com.tw/json/station-min-yb2.json'
+        apiurl = f'{API_BASE}json/station-min-yb2.json'
 
     response = requests.get(
         apiurl,
@@ -108,7 +112,7 @@ def getallareas(gz=True):
         }
 
     response = requests.get(
-        'https://apis.youbike.com.tw/json/area-all.json',
+        f'{API_BASE}json/area-all.json',
         headers=headers
     )
     return response.json()
